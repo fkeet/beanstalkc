@@ -1,1 +1,1 @@
-from fixtures import setup, teardown
+from .fixtures import setup, teardown
