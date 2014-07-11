@@ -69,7 +69,7 @@ class Connection(object):
     def close(self):
         """Close connection to server."""
         try:
-            self._socket.sendall('quit\r\n')
+            self._socket.sendall('quit\r\n'.encode('ascii'))
         except socket.error:
             pass
         try:
@@ -83,7 +83,7 @@ class Connection(object):
         self.connect()
 
     def _interact(self, command, expected_ok, expected_err=[]):
-        SocketError.wrap(self._socket.sendall, command)
+        SocketError.wrap(self._socket.sendall, command.encode('ascii'))
         status, results = self._read_response()
         if status in expected_ok:
             return results
@@ -93,7 +93,7 @@ class Connection(object):
             raise UnexpectedResponse(command.split()[0], status, results)
 
     def _read_response(self):
-        line = SocketError.wrap(self._socket_file.readline)
+        line = SocketError.wrap(self._socket_file.readline).decode('utf8')
         if not line:
             raise SocketError()
         response = line.split()
