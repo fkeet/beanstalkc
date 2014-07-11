@@ -1,5 +1,6 @@
 beanstalkc
 ==========
+This is my py3k version used in production.
 
 beanstalkc is a simple beanstalkd client library for Python. [beanstalkd][] is
 a fast, distributed, in-memory workqueue service.
